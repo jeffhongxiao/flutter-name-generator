@@ -33,14 +33,10 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   Widget _buildSuggestions() {
-    return new ListView.builder(
+    final listView = new ListView.builder(
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
-        if (i.isOdd) {
-          return new Divider();
-        }
-
-        final index = i ~/ 2;
+        final index = i;
         if (index >= _suggestions.length) {
           _suggestions.addAll(generateWordPairs().take(10));
         }
@@ -48,6 +44,8 @@ class RandomWordsState extends State<RandomWords> {
         return _buildRow(_suggestions[index]);
       }
     );
+
+    return listView;
   }
 
   Widget _buildRow(WordPair pair) {
