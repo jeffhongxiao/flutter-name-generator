@@ -6,8 +6,14 @@ void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeData = new ThemeData(
+      primaryColor: Colors.blueGrey,
+    );
+
     return new MaterialApp(
       title: 'Flutter App by Hong Xiao',
+      //theme: new ThemeData.dark(),
+      theme: themeData,
       home: new RandomWords(),
     );
   }
