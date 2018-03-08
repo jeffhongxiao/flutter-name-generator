@@ -28,10 +28,34 @@ class RandomWordsState extends State<RandomWords> {
 
   @override
   Widget build(BuildContext context) {
+    final iconList =
+        new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved);
     return new Scaffold(
-      appBar: new AppBar(title: new Text('Startup Name Generator')),
+      appBar: new AppBar(
+        title: new Text('Startup Name Generator'),
+        actions: <Widget>[iconList],
+      ),
       body: _buildSuggestions(),
     );
+  }
+
+  void _pushSaved() {
+    final route = new MaterialPageRoute(builder: (context) {
+      final tiles = _saved.map((pair) {
+        final text = new Text(pair.asPascalCase, style: _biggerFont);
+        return new ListTile(title: text);
+      });
+
+      final divided =
+          ListTile.divideTiles(context: context, tiles: tiles).toList();
+
+      return new Scaffold(
+        appBar: new AppBar(title: new Text('Saved Suggestions')),
+        body: new ListView(children: divided),
+      );
+    });
+
+    Navigator.of(context).push(route);
   }
 
   Widget _buildSuggestions() {
